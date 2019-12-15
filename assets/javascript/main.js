@@ -69,6 +69,7 @@ database.ref().on('child_added', function (snapshot) {
     console.log(sv.frequency);
     console.log(sv.time);
 
+    // Appending variable info from Firebase to HTML
     var addRow = $('<tr>').append(
         $('<td>').text(trainName),
         $('<td>').text(trainDestination),
@@ -77,4 +78,17 @@ database.ref().on('child_added', function (snapshot) {
     );
 
     $('#train-schedule > tbody').append(addRow);
+
+    // Error handling
+}, function (errorObject) {
+    console.log('You have errors son: ' + errorObject.code);
+
+    /*
+    - Moment.js to calculate Minutes away + append to the Minutes Away column
+    - Math needs to look at the frequency and generate the minutes away, based
+    upon the frequency
+    - Look at the train-example.html file for help tomorrow
+    */
+
+
 });
