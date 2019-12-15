@@ -25,20 +25,20 @@ $('#train-btn').click(function (event) {
     // Grabbing the train name
     var trainName = $('#train-name').val().trim();
     var trainDestination = $('#train-destination').val().trim();
-    var trainTime = $('#train-time').val().trim();
     var trainFrequency = $('#train-frequency').val().trim();
+    var trainTime = $('#train-time').val().trim();
 
     console.log(trainName);
     console.log(trainDestination);
-    console.log(trainTime);
     console.log(trainFrequency);
+    console.log(trainTime);
 
     // Holds train data
     var newTrain = {
         name: trainName,
         destination: trainDestination,
-        time: trainTime,
         frequency: trainFrequency,
+        time: trainTime,
     };
 
     // Push train info to database
@@ -47,8 +47,8 @@ $('#train-btn').click(function (event) {
     // Log train info
     console.log(newTrain.name);
     console.log(newTrain.destination);
-    console.log(newTrain.time);
     console.log(newTrain.frequency);
+    console.log(newTrain.time);
 });
 
 // Firebase watcher + initial loader
@@ -58,13 +58,22 @@ database.ref().on('child_added', function (snapshot) {
 
     // Store items into variable
     var trainName = sv.name;
+    var trainDestination = sv.destination;
+    var trainFrequency = sv.frequency;
+    var trainTime = sv.time;
 
     // Console log user data
     console.log(sv);
     console.log(sv.name);
+    console.log(sv.destination);
+    console.log(sv.frequency);
+    console.log(sv.time);
 
     var addRow = $('<tr>').append(
-        $('<td>').text(trainName)
+        $('<td>').text(trainName),
+        $('<td>').text(trainDestination),
+        $('<td>').text(trainFrequency),
+        $('<td>').text(trainTime),
     );
 
     $('#train-schedule > tbody').append(addRow);
