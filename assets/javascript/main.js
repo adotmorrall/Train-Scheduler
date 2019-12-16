@@ -58,7 +58,7 @@ database.ref().on('child_added', function (snapshot) {
     var trainFrequency = sv.frequency;
     var trainTime = sv.time;
 
-    //Moment.js
+    // Moment.js
 
     var trainArrival = moment(trainTime, 'hh:mm A');
     var newArrival;

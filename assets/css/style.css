@@ -1,0 +1,16 @@
+body {
+    margin-top: 1em;
+}
+
+.jumbotron.jumbotron-fluid, .card-header, #train-btn {
+    background: rgb(67, 94, 110);
+    color: whitesmoke;
+}
+
+.card-header {
+    font-weight: 700;
+}
+
+.td {
+    text-align: center;
+}
