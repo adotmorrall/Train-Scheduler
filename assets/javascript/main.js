@@ -14,10 +14,6 @@ firebase.initializeApp(firebaseConfig);
 // Reference to database
 var database = firebase.database();
 
-var trainName = '';
-
-// Test to add train information to the train schedule
-
 $('#train-btn').click(function (event) {
     // Added - Don't refresh the page
     event.preventDefault();
@@ -62,6 +58,25 @@ database.ref().on('child_added', function (snapshot) {
     var trainFrequency = sv.frequency;
     var trainTime = sv.time;
 
+    //Moment.js
+
+    var trainArrival = moment(trainTime, 'hh:mm A');
+    var newArrival;
+
+    newArrival = trainArrival.format('h:mm A');
+    console.log(newArrival);
+
+    // Minutes awway
+
+    // Difference between the times
+    var diffTime = moment().diff(moment(trainArrival), "minutes");
+
+    // Time apart
+    var timeRemainder = diffTime % sv.frequency;
+
+    // Minutes away
+    var minutesAway = sv.frequency - timeRemainder;
+
     // Console log user data
     console.log(sv);
     console.log(sv.name);
@@ -74,7 +89,8 @@ database.ref().on('child_added', function (snapshot) {
         $('<td>').text(trainName),
         $('<td>').text(trainDestination),
         $('<td>').text(trainFrequency),
-        $('<td>').text(trainTime),
+        $('<td>').text(newArrival),
+        $('<td>').text(minutesAway),
     );
 
     $('#train-schedule > tbody').append(addRow);
@@ -83,12 +99,7 @@ database.ref().on('child_added', function (snapshot) {
 }, function (errorObject) {
     console.log('You have errors son: ' + errorObject.code);
 
-    /*
-    - Moment.js to calculate Minutes away + append to the Minutes Away column
-    - Math needs to look at the frequency and generate the minutes away, based
-    upon the frequency
-    - Look at the train-example.html file for help tomorrow
-    */
+
 
 
 });
